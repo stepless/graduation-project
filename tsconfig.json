@@ -33,7 +33,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-  ],
+, "src/shims-vue.d.ts", "src/main.ts", "src/router/index.ts", "src/mixins/roll.js"  ],
   "exclude": [
     "node_modules"
   ]

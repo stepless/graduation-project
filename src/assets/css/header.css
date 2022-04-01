@@ -1,0 +1,88 @@
+.nav{
+    width:100vw;
+    display:flex;
+    height:80px;
+    align-items: center;
+    justify-content: space-between;
+    position:fixed;
+    z-index: 10;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+    font-family: tahoma, arial, 'Hiragino Sans GB', '\5b8b\4f53', sans-serif;
+}
+.nav .logo{
+    padding-left:30px;
+}
+.nav .logo img{
+    display:block;
+    height:80px;
+}
+.nav .item2 ul{
+    display: flex;
+    justify-content: flex-end;
+}
+.nav .item2 ul li{
+    margin:0 10px;
+}
+.nav .item2 ul li a{
+    height: 50px;
+    line-height: 50px;
+    display: block;
+    padding:0 20px;
+    color:black;
+    font-size: 18px;
+}
+.nav .item2 ul li a.white{
+    color:white;
+}
+.nav .item3{
+    margin-right: 60px;
+}
+.nav .item3 a{
+    display: block;
+    background-color:#de7154;
+    padding:13px 20px;
+    border-radius:3px;
+    color:white;
+}
+.nav .item3 a:hover{
+    background-color: #dd5e3b;
+}
+.nav .item5{
+    flex-grow: 1;
+}
+.nav .item4{
+    width:60px;
+    height: 60px;
+    margin-right: 60px;
+    text-align: center;
+    position: relative;
+}
+.nav .item4 i{
+    color:#999;
+    font-size:42px;
+    font-weight: 600;
+    line-height: 60px;
+    cursor: pointer;
+}
+.nav .item4:hover .select{
+    display:block;
+}
+.item4 .select{
+    display:none;
+    position:absolute;
+    border-radius: 6px;
+    width:120px;
+    top:60px;
+    left:-30px;
+    background-color: #fff;
+}
+.item4 .select li a{
+    display: block;
+    line-height: 28px;
+    padding:5px 10px;
+    color:#555;
+}
+.nav ul li a:hover{
+    color:#d15431 !important;
+}

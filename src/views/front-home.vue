@@ -1,0 +1,123 @@
+<template>
+    <div class="page">
+        <Header />
+        <div class="topImg">
+            <img class="massif" src="../assets/山.gif">
+            <div class="ripple-ya">
+                <img class="ripple" src="../assets/水波.gif">
+                <img class="ya1 ya" src="../assets/小黄鸭1.png">
+                <img class="ya2 ya" src="../assets/小黄鸭2.png">
+            </div>
+        </div>
+        <Shallow />
+        <Rubbish />
+        <Whale />
+        <Seabed />
+        <Below />
+    </div>
+</template>
+
+<script>
+import Header from "../components/header.vue";
+import Shallow from "../components/shallow.vue";
+import Rubbish from "../components/rubbish.vue";
+import Whale from "../components/whale.vue";
+import Seabed from "../components/seabed.vue";
+import Below from "../components/below.vue"
+export default {
+    data(){
+        return {
+            documentWidth : document.body.clientWidth
+        }
+    },
+    components:{Header,Shallow,Rubbish,Whale,Seabed,Below,},
+    computed:{
+        left(){
+            return this.documentWidth/2;
+        }
+    },
+    mounted() {
+        const ya1 = document.querySelector('.ya1');
+        const ya2 = document.querySelector('.ya2');
+        ya1.style.left = this.left + 'px';
+        ya2.style.left = this.left + 'px';
+        window.addEventListener("resize",() => {
+            return (() => {
+                this.documentWidth = document.body.clientWidth;
+                ya1.style.left = this.left + 'px';
+                ya2.style.left = this.left + 'px';
+            })();
+        })
+        const he = document.querySelectorAll('header .item2 ul li a');
+        for(let i = 0; i < he.length; i++){
+            if(he[i].className.indexOf('white') < 0){
+                he[i].className += 'white';
+            }
+            
+        }
+    },
+}
+</script>
+
+
+<style scoped>
+header.nav{
+    background-color:rgba(0,0,0,0);
+    box-shadow: none;
+}
+.topImg{
+    background: linear-gradient(0deg, rgba(133,221,201,1) 55%, rgba(57,133,206,1) 100%);
+    position: relative;
+}
+.topImg .ripple-ya{
+    position: relative;
+}
+.topImg .ripple-ya .ripple{
+    width:100%;
+    margin-top:-4px;
+    height: 226px;
+}
+.topImg .ripple-ya .ya{
+    width:80px;
+    height:80px;
+    position:absolute;
+    top:10px;
+}
+.topImg .ripple-ya .ya1{
+    animation:2s infinite alternate forwards floating1;
+}
+.topImg .ripple-ya .ya2{
+    animation:2.5s ease-in-out infinite alternate forwards floating2;
+}   
+@keyframes floating1{
+    0%{
+        transform:translateX(-100px) rotateZ(0deg) rotateY(0deg);
+    }20%{
+        transform:translateX(-100px) rotateZ(18deg)  rotateY(10deg);
+    }
+    75%{
+        transform:translateX(-100px) rotateZ(-10deg)  rotateY(5deg);
+    }100%{
+        transform:translateX(-100px) rotateZ(-2deg)  rotateY(-2deg);
+    }
+}
+
+@keyframes floating2{
+    0%{
+        transform:translate(0) rotateZ(0deg);
+    }20%{
+        transform: translate(-10px) rotateZ(0deg);
+    }
+    50%{
+        transform:translate(-20px) rotateZ(20deg);
+    }
+    75%{
+        transform: translate(-10px) rotateZ(-10deg);
+    }100%{
+        transform: translate(0px) rotateZ(0deg);
+    }
+}
+.rubbish{
+    margin-top:-1680px;
+}
+</style>

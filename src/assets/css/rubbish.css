@@ -1,0 +1,81 @@
+.rubbish{
+    position:relative;
+}
+.rubbish img{
+    width:80px;
+    display: block;
+    position:absolute;
+    -webkit-animation:2.5s ease-in-out infinite alternate forwards rubbishMove;
+            animation:2.5s ease-in-out infinite alternate forwards rubbishMove;
+}
+.rubbish img.sack{
+    left:1100px;
+    top:160px;
+}
+.rubbish img.plastic{
+    left:624px;
+    top:406px;
+}
+.rubbish img.bucket{
+    left:1059px;
+    top:-67px;
+}
+.rubbish img.bone{
+    left:165px;
+    top:50px;
+}
+.rubbish img.bottle{
+    left:283px;
+    top:209px;
+}
+.rubbish img.sack1{
+    left:80px;
+    top:412px;
+}
+.rubbish img.plastic1{
+    left:160px;
+    top:775px;
+}
+.rubbish img.bucket1{
+    left:725px;
+    top:144px;
+}
+.rubbish img.bone1{
+    left:1010px;
+    top:608px;
+}
+.rubbish img.bottle1{
+    width:60px;
+    left:470px;
+    top:650px;
+}
+@-webkit-keyframes rubbishMove{
+    0%{
+        transform:translate(0);
+    }20%{
+        transform: translate(10px);
+    }
+    50%{
+        transform:translate(40px);
+    }
+    75%{
+        transform: translate(30px);
+    }100%{
+        transform: translate(0px);
+    }
+}
+@keyframes rubbishMove{
+    0%{
+        transform:translate(0);
+    }20%{
+        transform: translate(10px);
+    }
+    50%{
+        transform:translate(40px);
+    }
+    75%{
+        transform: translate(30px);
+    }100%{
+        transform: translate(0px);
+    }
+}
