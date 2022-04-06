@@ -1,10 +1,10 @@
 <template>
     <div class="whale">
-        <img class="whale1" src="../assets/鲸鱼2.png" />
+        <img class="whale1" src="../../assets/img/鲸鱼2.png" />
     </div>
 </template>
 <script>
-import roll from "../mixins/roll.js"
+import roll from "../../mixins/roll.js"
 export default {
 
     mixins:[roll],

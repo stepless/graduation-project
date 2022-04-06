@@ -2,11 +2,11 @@
     <div class="page">
         <Header />
         <div class="topImg">
-            <img class="massif" src="../assets/山.gif">
+            <img class="massif" src="../assets/img/山.gif">
             <div class="ripple-ya">
-                <img class="ripple" src="../assets/水波.gif">
-                <img class="ya1 ya" src="../assets/小黄鸭1.png">
-                <img class="ya2 ya" src="../assets/小黄鸭2.png">
+                <img class="ripple" src="../assets/img/水波.gif">
+                <img class="ya1 ya" src="../assets/img/小黄鸭1.png">
+                <img class="ya2 ya" src="../assets/img/小黄鸭2.png">
             </div>
         </div>
         <Shallow />
@@ -19,11 +19,11 @@
 
 <script>
 import Header from "../components/header.vue";
-import Shallow from "../components/shallow.vue";
-import Rubbish from "../components/rubbish.vue";
-import Whale from "../components/whale.vue";
-import Seabed from "../components/seabed.vue";
-import Below from "../components/below.vue"
+import Shallow from "../components/sea/shallow.vue";
+import Rubbish from "../components/sea/rubbish.vue";
+import Whale from "../components/sea/whale.vue";
+import Seabed from "../components/sea/seabed.vue";
+import Below from "../components/sea/below.vue"
 export default {
     data(){
         return {

@@ -12,7 +12,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/law',
     name: 'FrontLow',
-    component: FrontLaw
+    component: () => import('../views/front-law.vue')
   },
   {
     path: '/about',
@@ -27,7 +27,13 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/hotspot',
     name: 'FrontHotspot',
-    component: () => import('../views/front-hotspot.vue')
+    component: () => import('../views/front-hotspot.vue'),
+    children: [
+			{
+			  path: '/',
+			  component: r => require.ensure([], () => r(require('@/views/front-hotspot.vue')), 'index')
+			},
+		],
   }
 ]
 

@@ -1,0 +1,56 @@
+.card{
+    width:730px;
+    height:160px;
+    border-top:1px solid rgb(238, 238, 238);
+    padding:30px 5px;
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between;
+    font-family:Helvetica,Arial,sans-serif;
+}
+.card .article-header a{
+    display: block;
+    font-size:18px;
+    font-weight: bold;
+    float:left;
+    cursor: pointer;
+}
+.card .article-header a:hover{
+    color:#9a9a9a78;
+}
+.card .article-header button{
+    margin-left: 380px;
+}
+.card .pull-right{
+    float:right;
+    color:#aaa;
+    font-size: 13px;
+    margin-left:10px;
+}
+.card .article-description{
+    color:#666;
+    line-height: 1.5;
+    font-size:13px;
+}
+.card .iconfont{
+    font-size:13px;
+}
+.card .article-footer{
+    display: flex;
+    align-items: center;
+    width:100%;
+    justify-content: space-between;
+}
+.card .article-footer .article-author{
+    margin-right: 28px;
+    color:#666;
+    font-size: 14px;
+}
+.card .article-footer .tag{
+    display:inline-block;
+    padding:4px 6px;
+    background-color: #f0f9eb;
+    margin-left: 10px;
+    color: #a4a4a4;
+    border-radius:4px;
+}

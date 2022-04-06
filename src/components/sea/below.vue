@@ -1,7 +1,7 @@
 <template>
     <div class="below">
         <div class="contains">
-            <img src="../assets/页尾.gif" />
+            <img src="../../assets/img/页尾.gif" />
             <div class="content">
                 <ul>
                     <li v-for="(link,index) in this.links" :key="index">

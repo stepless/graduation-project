@@ -48,6 +48,39 @@
 .nav .item3 a:hover{
     background-color: #dd5e3b;
 }
+.relative{
+    position:relative;
+}
+.nav .user .head-portrait{
+    height: 36px;
+    width: 36px;
+    border:1px solid #ddd;
+    border-radius: 50%;
+    vertical-align: middle;
+    background-color: #00aaff;
+    cursor: pointer;
+}
+.nav .user:hover .personage{
+    display: block;
+}
+.nav .user .personage{
+    display: none;
+    position:absolute;
+    left:-29px;
+    bottom:-57px;
+    width:100px;
+    text-align: center;
+}
+.nav .user .personage a{
+    display: block;
+    background-color: #fff;
+    color:#999;
+    padding:6px 0;
+    border-radius: 0;
+}
+.nav .user .personage a:hover{
+    color:#de7154;
+}
 .nav .item5{
     flex-grow: 1;
 }
