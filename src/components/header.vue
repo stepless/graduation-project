@@ -8,9 +8,6 @@
                 <li v-for="(link,index) in this.links" :key="index"> 
                     <a :href="link">{{ index }}</a>
                 </li>
-                <!-- <li>
-                    <a href="/afterHome">后台管理</a>
-                </li> -->
             </ul>
         </nav>
         <div class="item5" v-if="this.documentWidth < 1200" />
@@ -22,13 +19,18 @@
                 <img :src="user.avatar"/>
             </div>
             <div class="personage">
-                <a href="javascript:;">个人中心</a>
-                <a href="javascript:;">退出</a>
+                <div class="arrows"></div>
+                <div class="arr"></div>
+                <a href="/information">个人中心</a>
+                <a v-if="this.user.admin" href="/after">后台管理</a>
+                <a @click="quit" href="javascript:;">退出</a>
             </div>
         </div>
         <div class="item4" v-if="this.documentWidth < 1200">
             <i class="iconfont icon-caidan"></i>
             <ul class="select">
+                <div class="arrows"></div>
+                <div class="arr"></div>
                 <li v-for="(link,index) in this.links" :key="index"> 
                     <router-link :to="link">{{ index }}</router-link>
                 </li>
@@ -39,6 +41,8 @@
 
 <script>
 import "@/assets/css/header.css"
+import default_avatar from '@/assets/img/dog.jpg'
+
 export default {
     data(){
         return {
@@ -53,6 +57,7 @@ export default {
             user:{
 			    login:false,
 			    avatar:"",
+                admin:false,
 		    }
         }
     },
@@ -69,6 +74,39 @@ export default {
                 this.documentWidth = document.documentElement.clientWidth;
             })();
         })
+        this.ifLogin();
+    },
+    computed: {
+    avatar() {
+        let avatar = this.user.avatar;
+        if (avatar.length > 0) {
+            return avatar
+        }
+            return default_avatar
+        },
+    },
+    methods : {
+        ifLogin(){
+            let account = localStorage.getItem('account');
+            let id = localStorage.getItem('id')
+            let admin = localStorage.getItem('admin');
+            if(account != null && id != null){
+                this.user.login = true;
+                this.user.avatar = localStorage.getItem('avatar');
+                if(admin == 1){
+                    this.user.admin = true;
+                }
+            }else{
+                this.user.login = false;
+                this.user.avatar = '';
+                this.user.admin = false;
+            }
+        },
+        quit(){
+            localStorage.clear();
+            this.$message.success('退出成功');
+            this.ifLogin();
+        }
     }
 }
 </script>

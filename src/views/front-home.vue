@@ -23,7 +23,7 @@ import Shallow from "../components/sea/shallow.vue";
 import Rubbish from "../components/sea/rubbish.vue";
 import Whale from "../components/sea/whale.vue";
 import Seabed from "../components/sea/seabed.vue";
-import Below from "../components/sea/below.vue"
+import Below from "../components/sea/below.vue";
 export default {
     data(){
         return {
@@ -48,13 +48,6 @@ export default {
                 ya2.style.left = this.left + 'px';
             })();
         })
-        const he = document.querySelectorAll('header .item2 ul li a');
-        for(let i = 0; i < he.length; i++){
-            if(he[i].className.indexOf('white') < 0){
-                he[i].className += 'white';
-            }
-            
-        }
     },
 }
 </script>
@@ -64,6 +57,9 @@ export default {
 header.nav{
     background-color:rgba(0,0,0,0);
     box-shadow: none;
+}
+header.nav >>> .item2 ul li a{
+  color:white;
 }
 .topImg{
     background: linear-gradient(0deg, rgba(133,221,201,1) 55%, rgba(57,133,206,1) 100%);

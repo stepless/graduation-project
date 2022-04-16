@@ -2,7 +2,6 @@
     <div class="card">
         <div class="article-header clearfix">
             <a @click="view(id)">{{ title }}</a>
-            <button v-if="weight > 0" class="article-icon" >置顶</button>
             <span class="pull-right article-count">
                 <i class="icon-comment"></i>&nbsp;{{ commentCounts }}
             </span>
@@ -11,7 +10,7 @@
             </span>
         </div>
 
-        <div class="article-description">
+        <div @click="view(id)" class="article-description">
             {{summary}}
         </div>
         <div class="article-footer">
@@ -19,8 +18,8 @@
                 <span class="article-author">
                     <i class="icon-author"></i><span class="tag-author">{{ author }}</span>
                 </span>
+                <div class="tag" v-for="t in tags" :key="t.tagName">{{t.tagName}}</div>
             </div>
-            <div class="tag" v-for="t in tags" :key="t.tagName">{{t.tagName}}</div>
             <span class="pull-right article-count">
                 <i class="iconfont icon-shizhong1"></i>&nbsp;{{ createDate}}
             </span>

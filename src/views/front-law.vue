@@ -2,7 +2,7 @@
     <div class="page">
         <Header />
         <div class="main">
-            main
+            
         </div>
     </div>
 </template>

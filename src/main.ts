@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import app from './App.vue'
 import router from './router'
 import store from './store'
@@ -12,7 +12,7 @@ import VueAxios from 'vue-axios'
 
 const vm = createApp(app);
 
-vm.directive('title',function(el, binding){
+vm.directive('title', function (el, binding) {
     document.title = el.dataset.title;
 })
 

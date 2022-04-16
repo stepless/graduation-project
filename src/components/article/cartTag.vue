@@ -25,10 +25,10 @@
     },
     methods: {
       moreTags() {
-        this.$router.push('/tag/all')
+        this.$router.push('/hotspot/tag/all')
       },
       tag(id) {
-        this.$router.push({path: `/tag/${id}`})
+        this.$router.push({path: `/hotspot/tag/${id}`})
       }
     }
   }
@@ -37,8 +37,8 @@
 <style scoped>
     .cartTag{
         width:100%;
-        border:1px solid red;
         margin-top:30px;
+        min-height: 160px;
     }
     .tag-header {
         display: flex;
@@ -46,7 +46,9 @@
         align-items: center;
         font: 15px Arial, Helvetica, sans-serif;
         color: #072;
-        margin-bottom:12px;
+        margin-bottom:15px;
+        border-bottom:1px solid #f0f0f0;
+        padding-bottom: 15px;
     }
 
     .tag-more{
@@ -57,15 +59,23 @@
     .tag-more:hover{
         color:#37a;
     }
-
-    .tag-item {
-        display: inline-block;
-        padding: 4px;
-        font-size: 14px;
-        color: #5FB878;
+    .tag-list .tag-item{
+      display: inline-block;
+      color: #ccc;
+      border: 1px solid #e5e5e5;
+      border-radius: 2px;
+      padding: 0 10px;
+      line-height: 21px;
+      margin-bottom: 12px;
+      margin-right: 10px;
+      font-size: 13px;
+    }
+    .tag-item button{
+        color: #37a;
+        cursor: pointer;
     }
 
-    .tag-item a:hover {
-        text-decoration: underline;
+    .tag-item button:hover {
+        color: #494949;
     }
 </style>
