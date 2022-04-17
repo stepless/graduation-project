@@ -35,7 +35,78 @@
     top:-30px;
     left:20px;
 }
+.introduce .headImg:hover .figure{
+    opacity: 1;
+}
+.introduce .headImg .figure{
+    position:absolute;
+    width: 160px;
+    height: 160px;
+    background-color: rgba(18, 18, 18, .2);
+    top:4px;
+    left:4px;
+    border-radius: 6px;
+    text-align: center;
+    color:white;
+    padding-top:14px;
+    line-height: 1.25;
+    transition:opacity .3s;
+    cursor: pointer;
+    opacity: 0;
+}
 
+
+.introduce .headImg .figure i{
+    font-size: 64px;
+}
+
+.introduce .headImg .selectImg{
+    position:absolute;
+    display: none;
+    width: 730px;
+    height: 370px;
+    left: 0px;
+    top:184px;
+    border-radius: 8px;
+    z-index: 3;
+    background-color: rgb(255,255,255);
+    box-shadow:0px 0px 2px rgb(147, 147, 147);
+}
+.introduce .headImg .selectImg::before{
+    display: block;
+    content:'';
+    position:absolute;
+    height: 30px;
+    width:730px;
+    height: 30px;
+    left: 0px;
+    top: -20px;
+    background-color: transparent;
+}
+.introduce .headImg .selectImg:hover{
+    display: block;
+}
+.introduce .headImg:hover .selectImg{
+    display:block;
+}
+.selectImg .headPortraits li{
+    width:180px;
+    height: 180;
+    overflow: hidden;
+    border-radius: 6px;
+    padding-top:10px;
+    padding-left:10px;
+    float:left;
+    cursor: pointer;
+}
+.selectImg .headPortraits li img{
+    border-radius: 6px;
+    display: block;
+}
+.selectImg .headPortraits li:hover img{
+    transform:translate(-5px,-5px);
+    box-shadow:0px 0px 4px rgb(188, 188, 188);
+}
 .introduce .property{
     margin-left: 168px;
     padding-top:16px;

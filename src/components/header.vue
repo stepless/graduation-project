@@ -106,6 +106,7 @@ export default {
             localStorage.clear();
             this.$message.success('退出成功');
             this.ifLogin();
+            this.$router.push('/login');
         }
     }
 }

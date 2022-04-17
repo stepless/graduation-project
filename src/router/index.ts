@@ -62,7 +62,19 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/after',
         name: 'After',
-        component: () => import('../views/after-home.vue')
+        component: () => import('../views/after-home.vue'),
+        children: [
+            {
+                path: '',
+                name: 'afterHome',
+                component: () => import('../views/after/write.vue')
+            },
+            {
+                path: '/user',
+                name: 'userList',
+                component: () => import('../views/after/userList.vue')
+            },
+        ]
     }
 
 ]

@@ -8,6 +8,17 @@
             <div class="introduce">
                 <div class="headImg">
                     <img :src="avatar" />
+                    <div class="figure">
+                        <i class="iconfont icon-w_xiangpian"></i><br/>
+                        修改我的头像
+                    </div>
+                    <div class="selectImg">
+                        <ul class="headPortraits clearfix">
+                            <li v-for="key in this.headPortrait" :key="key">
+                                <img @click="cutImg(key.url)" :src="key.url" />
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="property">
                     <div class="user-name">
@@ -105,6 +116,7 @@
 import Header from "../components/header.vue";
 import default_avatar from "@/assets/img/dog.jpg"
 import '@/assets/css/information.css'
+import {getUser,setUser} from '@/api/user.js'
 export default {
     components:{Header,},
     data(){
@@ -118,12 +130,24 @@ export default {
                 sex:'女',
                 brief:'一条马路',
             },
+            sysUser:{
+                id:localStorage.getItem('id')
+            },
             isShow:[true,true,true,true],
             temporary:{},
+            headPortrait:[
+                {url:'/static/user/user_1.jpg'},
+                {url:'/static/user/user_2.jpg'},
+                {url:'/static/user/user_3.jpg'},
+                {url:'/static/user/user_4.jpg'},
+                {url:'/static/user/user_5.jpg'},
+                {url:'/static/user/user_6.jpg'},
+                {url:'/static/user/dog.jpg'}
+            ],
         }
     },
     mounted(){
-        Object.assign(this.temporary,this.user);
+        this.getUser();
     },
     computed:{
         avatar(){
@@ -139,6 +163,32 @@ export default {
         }
     },
     methods:{
+        getUser(){
+            getUser(this.sysUser).then((res)=>{
+				////res.data = Result (success,msg,data)
+				if(res.data.success){
+                    Object.assign(this.user,res.data.data);
+                    Object.assign(this.temporary,res.data.data);
+                }else{
+                    this.$message.error(res.data.msg);
+                }
+            }).catch((err)=>{
+                this.$message.error("系统错误");
+            }).finally(()=>{
+			})
+        },
+        setUser(){
+            setUser(this.user).then((res)=>{
+				////res.data = Result (success,msg,data)
+				if(res.data.success){
+                }else{
+                    this.$message.error(res.data.msg);
+                }
+            }).catch((err)=>{
+                this.$message.error("系统错误");
+            }).finally(()=>{
+			})
+        },
         setIsShow(i){
             for(let j = 0; j < this.isShow.length; j++){
                 if(j === i){
@@ -152,10 +202,18 @@ export default {
             this.isShow[i] = true;
             if(ifT){
                 Object.assign(this.user,this.temporary);
+                this.setUser();
             }else{
                 Object.assign(this.temporary,this.user);
             }
-        }
+        },
+        cutImg(url){
+            this.user.avatar = url;
+            Object.assign(this.temporary,this.user);
+            this.setUser();
+            localStorage.setItem('avatar',url);
+            this.$router.go(0);
+        },
     }
 }
 </script>

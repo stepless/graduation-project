@@ -33,20 +33,19 @@ export default {
             articles:[],
             innerPage: {
                 page : 1,
-                pageSize : 5,
+                pageSize : 2,
                 tagId : null,
             }
         }
     },
     methods:{
-        load(){
-            //如果触发分页，调用接口 加载文章
-            this.getArticles();
-        },
+        // load(){
+        //     //如果触发分页，调用接口 加载文章
+        //     this.getArticles();
+        // },
         getArticles(){
             this.loading = true;
             this.innerPage.tagId = this.query.tagId;
-            this.innerPage.page += 5;
             // this.$http.post('http://localhost:8888/articles',this.innerPage).then((res) => {
             getArticles(this.innerPage).then((res) => {
                 if(res.data.success){

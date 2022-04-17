@@ -37,7 +37,7 @@
             <div class="view-comment-write">
               <div class="headImg-write">
                 <div class="headImg">
-                  <img class="view-picture" :src="avatar" />
+                  <img class="view-picture" :src="commentAvatar" />
                 </div>
                 <div class="write">
                   <el-input
@@ -114,10 +114,17 @@ export default {
       }
       return default_avatar
     },
+    commentAvatar(){
+      let commentAvatar = localStorage.getItem('avatar');
+      if(commentAvatar){
+        return commentAvatar;
+      }
+      return default_avatar;
+    }
   },
   methods: {
     tag(id) {
-      this.$router.push({path: `/tag/${id}`})
+      this.$router.push({path: `/hotspot/tag/${id}`})
     },
     getArticle() {
       let that = this

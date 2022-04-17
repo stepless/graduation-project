@@ -1,7 +1,6 @@
 <template>
-  <div id="write" v-title :data-title="title">
-    <el-container>
-      <base-header :simple=true>
+  <div id="write">
+    <div class="contains">
         <el-col :span="4" :offset="2">
           <div class="me-write-info">写文章</div>
         </el-col>
@@ -11,7 +10,6 @@
             <el-button round @click="cancel">取消</el-button>
           </div>
         </el-col>
-      </base-header>
 
       <el-container class="me-area me-write-box">
         <el-main class="me-write-main">
@@ -26,7 +24,6 @@
 
           </div>
           <div id="placeholder" style="visibility: hidden;height: 89px;display: none;"></div>
-          <markdown-editor :editor="articleForm.editor" class="me-write-editor"></markdown-editor>
         </el-main>
       </el-container>
 
@@ -59,13 +56,11 @@
           <el-button type="primary" @click="publish('articleForm')">发布</el-button>
         </div>
       </el-dialog>
-    </el-container>
+    </div>
   </div>
 </template>
 
 <script>
-  import BaseHeader from '@/views/BaseHeader'
-  import MarkdownEditor from '@/components/markdown/MarkdownEditor'
   import {publishArticle, getArticleById} from '@/api/article'
   import {getAllTags} from '@/api/tag'
 
@@ -76,9 +71,7 @@
       if(this.$route.params.id){
         this.getArticleById(this.$route.params.id)
       }
-
-      this.getCategorysAndTags()
-      this.editorToolBarToFixedWrapper = this.$_.throttle(this.editorToolBarToFixed, 200)
+      this.getTags()
 
       window.addEventListener('scroll', this.editorToolBarToFixedWrapper, false);
     },
@@ -88,7 +81,6 @@
     data() {
       return {
         publishVisible: false,
-        categorys: [],
         tags: [],
         articleForm: {
           id: '',
@@ -96,35 +88,6 @@
           summary: '',
           category: '',
           tags: [],
-          editor: {
-            value: '',
-            ref: '',//保存mavonEditor实例  实际不该这样
-            default_open: 'edit',
-            toolbars: {
-              bold: true, // 粗体
-              italic: true, // 斜体
-              header: true, // 标题
-              underline: true, // 下划线
-              strikethrough: true, // 中划线
-              mark: true, // 标记
-              superscript: true, // 上角标
-              subscript: true, // 下角标
-              quote: true, // 引用
-              ol: true, // 有序列表
-              ul: true, // 无序列表
-              imagelink: true, // 图片链接
-              code: true, // code
-              fullscreen: true, // 全屏编辑
-              readmodel: true, // 沉浸式阅读
-              help: true, // 帮助
-              undo: true, // 上一步
-              redo: true, // 下一步
-              trash: true, // 清空
-              navigation: true, // 导航目录
-              //subfield: true, // 单双栏模式
-              preview: true, // 预览
-            }
-          }
         },
         rules: {
           summary: [
@@ -140,11 +103,6 @@
         }
       }
     },
-    computed: {
-      title (){
-        return '写文章 - 码神之路'
-		}
-	},
     methods: {
       getArticleById(id) {
         let that = this
@@ -245,24 +203,11 @@
           this.$router.push('/')
         })
       },
-      getCategorysAndTags() {
+      getTags() {
         let that = this
-        getAllCategorys().then(data => {
-          if(data.success){
-            that.categorys = data.data
-          }else{
-             that.$message({type: 'error', message: '文章分类加载失败', showClose: true})
-          }
-
-        }).catch(error => {
-          if (error !== 'error') {
-            that.$message({type: 'error', message: '文章分类加载失败', showClose: true})
-          }
-        })
-
-        getAllTags().then(data => {
-          if(data.success){
-            that.tags = data.data
+        getAllTags().then((res) => {
+          if(res.data.success){
+            that.tags = res.data.data
           }else{
              that.$message({type: 'error', message: '标签加载失败', showClose: true})
           }
@@ -286,19 +231,15 @@
         }
       }
     },
-    components: {
-      'base-header': BaseHeader,
-      'markdown-editor': MarkdownEditor
-    },
-    //组件内的守卫 调整body的背景色
-    beforeRouteEnter(to, from, next) {
-      window.document.body.style.backgroundColor = '#fff';
-      next();
-    },
-    beforeRouteLeave(to, from, next) {
-      window.document.body.style.backgroundColor = '#f5f5f5';
-      next();
-    }
+    // //组件内的守卫 调整body的背景色
+    // beforeRouteEnter(to, from, next) {
+    //   window.document.body.style.backgroundColor = '#fff';
+    //   next();
+    // },
+    // beforeRouteLeave(to, from, next) {
+    //   window.document.body.style.backgroundColor = '#f5f5f5';
+    //   next();
+    // }
   }
 </script>
 
@@ -327,9 +268,6 @@
 
   .me-write-main {
     padding: 0;
-  }
-
-  .me-write-title {
   }
 
   .me-write-input textarea {

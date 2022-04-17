@@ -1,0 +1,92 @@
+.menu{
+    height: 80px;
+    width:100%;
+    position:fixed;
+    background-color: rgb(67, 74, 80);
+    z-index: 3;
+}
+.menu .logo{
+    height: 80px;
+    width:259px;
+    float:left;
+}
+.menu .logo img{
+    height: 80px;
+}
+.side{
+    width:260px;
+    padding-top:80px;
+    height:100vh;
+    min-height: 750px;
+    position:fixed;
+    z-index: 2;
+}
+
+.relative {
+    position: relative;
+}
+.user{
+    float:right;
+    margin-right: 50px;
+    margin-top:22px;
+}
+.user .head-portrait {
+    height: 36px;
+    width: 36px;
+    outline: 1px solid #ddd;
+    border-radius: 50%;
+    vertical-align: middle;
+    background-color: #00aaff;
+    cursor: pointer;
+    overflow: hidden;
+}
+.user .head-portrait img{
+    display:block;
+    width: 36px;
+    height: 36px;
+}
+
+.user:hover .personage {
+    display: block;
+}
+
+.user .personage {
+    display: none;
+    position: absolute;
+    left: -32px;
+    top: 50px;
+    width: 100px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 5px;
+}
+.user .arrows{
+    position:absolute;
+    left:50px;
+    width:16px;
+    height:16px;
+    background-color: white;
+    top:-6px;
+    transform: translate(-50%) rotate(45deg);
+    border-radius: 3px;
+}
+.user .arr{
+    width:100px;
+    height: 18px;
+    position: absolute;
+    left:0;
+    top:-18px;
+    background-color: transparent;
+}
+.user .personage a {
+    display: block;
+    background-color: transparent;
+    color: #999;
+    padding: 6px 0;
+    border-radius: 0;
+    font: 16px tahoma, arial, "Hiragino Sans GB", 宋体, sans-serif;
+}
+
+.user .personage a:hover {
+    color: #dd542e;
+}
