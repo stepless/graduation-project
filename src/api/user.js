@@ -21,3 +21,27 @@ export function findAllUser() {
         url: '/user/get',
     })
 }
+
+export function addUser(user){
+    return request({
+        method: 'post',
+        url: '/user/add',
+        data:user,
+    })
+}
+
+export function disableUser(userId){
+    return request({
+        method: 'post',
+        url: '/user/disable',
+        data:userId,
+    })
+}
+
+export function deleteUser(userId){
+    return request({
+        method: 'post',
+        url: '/user/delete',
+        data:userId,
+    })
+}

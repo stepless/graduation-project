@@ -25,47 +25,48 @@
                     active-text-color="#ffd04b"
                     background-color="#545c64"
                     class="el-menu-vertical-demo"
-                    default-active="2"
+                    default-active="1"
                     text-color="#fff"
                     @open="handleOpen"
                     @close="handleClose"
                 >
-                    <el-sub-menu index="1">
-                      <template #title>
-                          <el-icon><document /></el-icon>
-                          <span>用户管理</span>
-                      </template>
-                      <el-menu-item-group>
-                          <router-link to="/user">
-                          <el-menu-item index="1-1"><span>用户信息管理</span></el-menu-item>
-                          </router-link>
-                          <el-menu-item index="1-2"><span>用户评论管理</span></el-menu-item>
-                      </el-menu-item-group>
-                    </el-sub-menu>
-                    <el-sub-menu index="2">
+                    <router-link to="/afterHome">
+                      <el-menu-item index="1">
+                          <el-icon><icon-menu /></el-icon>
+                          <span>后台管理</span>
+                      </el-menu-item>
+                    </router-link>
+
+                    <router-link to="/user">
+                      <el-menu-item index="2">
+                        <el-icon><icon-menu /></el-icon>
+                        <span>用户管理</span>
+                      </el-menu-item>
+                    </router-link>
+                    
+                    <el-sub-menu index="3">
                       <template #title>
                           <el-icon><document /></el-icon>
                           <span>文章管理</span>
                       </template>
                       <el-menu-item-group>
-                          <el-menu-item index="2-1"><span>文章内容管理</span></el-menu-item>
-                          <el-menu-item index="2-2"><span>添加文章</span></el-menu-item>
+
+                          <router-link to="/articleManage">
+                            <el-menu-item index="2-1"><span>文章内容管理</span></el-menu-item>
+                          </router-link>
+
+                          <router-link to="/write">
+                            <el-menu-item index="2-2"><span>添加文章</span></el-menu-item>
+                          </router-link>
                       </el-menu-item-group>
                     </el-sub-menu>
-                    <el-sub-menu index="3">
-                      <template #title>
-                          <el-icon><document /></el-icon>
-                          <span>用户管理</span>
-                      </template>
-                      <el-menu-item-group>
-                          <el-menu-item index="3-1"><span>用户信息管理</span></el-menu-item>
-                          <el-menu-item index="3-2"><span>用户信息管理</span></el-menu-item>
-                      </el-menu-item-group>
-                    </el-sub-menu>
-                    <el-menu-item index="4">
-                      <el-icon><icon-menu /></el-icon>
-                      <span>权限管理</span>
-                    </el-menu-item>
+
+                    <router-link to="/articleManage">
+                      <el-menu-item index="4">
+                        <el-icon><icon-menu /></el-icon>
+                        <span>濒危鱼类管理</span>
+                      </el-menu-item>
+                    </router-link>
                 </el-menu>
                 </el-col>
             </el-row>

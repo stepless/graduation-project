@@ -10,7 +10,7 @@
 }
 .userL .search{
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-items:center;
     width:1000px;
     margin-left: auto;
@@ -82,7 +82,7 @@
 
 /* 表格 */
 .userShow{
-    margin-top:40px;
+    margin-top:20px;
 }
 .userShow .userT{
     height: 445px;
@@ -102,6 +102,13 @@
 .userShow .userTable tr td,
 .userShow .userTable tr th{
     border:1px solid rgba(221, 221, 221, 0.5);
+    max-width: 250px;
+}
+.userShow .userTable tr td>div{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding:0 10px;
 }
 .userShow .userTable tr th>div{
     font-weight: 600;
@@ -150,7 +157,9 @@
     padding-top:2px;
     line-height: 34px;
 }
-.addUser{
+
+/* 添加用户 */
+.back{
     position:fixed;
     background-color: rgba(221, 221, 221, 0.5);
     top:0px;
@@ -164,7 +173,7 @@
     margin-left: auto;
     margin-right: auto;
     background-color: white;
-    margin-top: 200px;
+    margin-top: 40px;
     padding:60px 80px;
     border-radius: 8px;
 }
@@ -173,4 +182,153 @@
 }
 .addUser .form .dialog-footer{
     margin-left: 200px;
+}
+
+.addUser .form .headImg{
+    position: relative;
+    width:88px;
+    height: 88px;
+    background-color: white;
+    padding:4px;
+    border-radius: 8px;
+    top:-30px;
+    left:20px;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+}
+.addUser .form .headImg:hover .figure{
+    opacity: 1;
+}
+.addUser .form .headImg .figure{
+    position:absolute;
+    width: 88px;
+    height: 88px;
+    background-color: rgba(18, 18, 18, .2);
+    top:0px;
+    left:0px;
+    border-radius: 6px;
+    text-align: center;
+    color:white;
+    padding-top:14px;
+    line-height: 1.25;
+    transition:opacity .3s;
+    cursor: pointer;
+    opacity: 0;
+}
+
+
+.addUser .form .headImg .figure i{
+    font-size: 26px;
+}
+
+.addUser .form .headImg .selectImg{
+    position:absolute;
+    display: none;
+    width: 730px;
+    height: 370px;
+    left: -300px;
+    top:100px;
+    border-radius: 8px;
+    z-index: 3;
+    background-color: rgb(255,255,255);
+    box-shadow:0px 0px 2px rgb(147, 147, 147);
+}
+.addUser .form .headImg .selectImg::before{
+    display: block;
+    content:'';
+    position:absolute;
+    height: 30px;
+    width:730px;
+    height: 30px;
+    left: 0px;
+    top: -20px;
+    background-color: transparent;
+}
+.addUser .form .headImg .selectImg:hover{
+    display: block;
+}
+.addUser .form .headImg:hover .selectImg{
+    display:block;
+}
+.selectImg .headPortraits li{
+    width:180px;
+    height: 180;
+    overflow: hidden;
+    border-radius: 6px;
+    padding-top:10px;
+    padding-left:10px;
+    float:left;
+    cursor: pointer;
+}
+.selectImg .headPortraits li img{
+    border-radius: 6px;
+    display: block;
+}
+.selectImg .headPortraits li:hover img{
+    transform:translate(-5px,-5px);
+    box-shadow:0px 0px 4px rgb(188, 188, 188);
+}
+
+
+
+/* 用户详细信息 */
+.details{
+    width:800px;
+    height: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    border-radius: 6px;
+    background-color: white;
+    box-shadow: 0 0 2px rgb(188, 188, 188);
+    position: relative;
+    padding-left:210px;
+    padding-top: 30px;
+}
+
+.details .headImg{
+    width:168px;
+    height: 168px;
+    padding:4px;
+    border-radius: 8px;
+    box-shadow: 0 0 2px rgb(188, 188, 188);
+    position:absolute;
+    left:30px;
+    top: 30px;
+}
+.details .detailsText ul li{
+    padding: 15px 0;
+    margin-left: 30px;
+    margin-right: 45px;
+    border-bottom: 1px solid #ebebeb;
+    position:relative;
+}
+.details .detailsText .field-label {
+    line-height: 36px;
+    color: #444;
+    position: absolute;
+    font-size: 15px;
+    font-weight: 600;
+    left:3px;
+    top: 15px;
+}
+.details .detailsText .field-content{
+    padding: 0 64px 0 140px;
+    line-height: 36px;
+}
+.details .shut{
+    height: 38px;
+    font-size: 14px;
+    padding: 0 36px;
+    line-height: 36px;
+    font-size: 13px;
+    color: #fff;
+    background-color: #409eff;
+    border:1px solid #409eff;
+    border-radius: 4px;
+    margin-left:140px;
+    margin-top:15px;
+    cursor: pointer;
+}
+.details .shut:hover{
+    background-color: #2388ec;
 }
