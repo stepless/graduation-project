@@ -83,12 +83,12 @@
                   </button>
                   <button v-if="user.state === 0" @click="disableUser(user)">
                     <el-tooltip class="item" effect="dark" content="取消禁用" placement="top">
-                      <i class="iconfont icon-zhengchang"></i>
+                      <i class="iconfont icon-jinyong"></i>
                     </el-tooltip>
                   </button>
-                  <button v-if="user.state === 1" @click="open(user)">
-                    <el-tooltip class="item" effect="dark" content="禁用" placement="top">
-                      <i class="iconfont icon-jinyong"></i>
+                  <button v-else @click="openAmend(user)">
+                    <el-tooltip class="item" effect="dark" content="修改" placement="top">
+                      <i class="iconfont icon-xiugai"></i>
                     </el-tooltip>
                   </button>
                   <button @click="this.openDetail(index)">
@@ -240,12 +240,97 @@
         </button>
       </div>
     </div>
+
+    <!-- 修改用户信息 -->
+    <div v-if="userAmendVisible" class="back amend">
+      <div class="details amends">
+        <div class="headImg">
+          <img :src="this.temporary.avatar" />
+          <div class="figure">
+              <i class="iconfont icon-w_xiangpian"></i><br/>
+              修改头像
+          </div>
+          <div class="selectImg">
+              <ul class="headPortraits clearfix">
+                  <li v-for="key in this.headPortrait" :key="key">
+                      <img @click="cutImg(key.url)" :src="key.url" />
+                  </li>
+              </ul>
+          </div>
+        </div>
+        <div class="detailsText">
+          <ul>
+            <li>
+              <h3 class="field-label">账号:</h3>
+              <div class="field-content">
+                <input type="text" v-model="temporary.account" placeholder="账号" />
+              </div>
+            </li>
+            <li>
+              <h3 class="field-label">昵称:</h3>
+              <div class="field-content">
+                <input type="text" v-model="temporary.nickname" placeholder="昵称" />
+              </div>
+            </li>
+            <li>
+              <h3 class="field-label">性别:</h3>
+              <div class="field-content">
+                <input type="radio" name="sex" value="男" v-model="temporary.sex">
+                男
+                <input type="radio" name="sex" value="女" v-model="temporary.sex">
+                女
+              </div>
+            </li>
+            <li>
+              <h3 class="field-label">手机号:</h3>
+              <div class="field-content">
+                <input type="text" v-model="temporary.phone" placeholder="手机号" />
+              </div>
+            </li>
+            <li>
+              <h3 class="field-label">邮箱:</h3>
+              <div class="field-content">
+                  <input type="text" v-model="temporary.email" placeholder="邮箱" />
+              </div>
+            </li>
+            <li>
+              <h3 class="field-label">介绍:</h3>
+              <div class="field-content">
+                <textarea rows="2" class="textarea" v-model="temporary.brief" placeholder="介绍" />
+              </div>
+            </li>
+            <li>
+              <h3 class="field-label">权限:</h3>
+              <div class="field-content">
+                <input type="radio" name="admin" value="1" v-model="temporary.admin">
+                管理员
+                <input type="radio" name="admin" value="0" v-model="temporary.admin">
+                用户
+              </div>
+            </li>
+            <li>
+              <h3 class="field-label">状态:</h3>
+              <div class="field-content">
+                <input type="radio" name="state" value="1" v-model="temporary.state">
+                正常
+                <input type="radio" name="state" value="0" v-model="temporary.state">
+                禁用
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="buttonGroup">
+          <button @click="notarizeAmend" type="button" class="sava">确认</button>
+          <button @click="shutAmend" type="button" class="cancel">取消</button>
+      </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import "@/assets/css/userList.css";
-import {findAllUser, addUser, disableUser, deleteUser} from '@/api/user.js'
+import {findAllUser, addUser, disableUser, deleteUser,setUser} from '@/api/user.js'
 export default {
   data() {
     return {
@@ -275,10 +360,6 @@ export default {
       pageN:0,
       selectI:0,
 
-      sysUser: {
-        id: localStorage.getItem("id"),
-      },
-
       temporary: {
           id:1,
           account: "",
@@ -294,6 +375,7 @@ export default {
       
       userMassageVisible:false,
       addDialogVisible: false,
+      userAmendVisible: false,
 
       addFormRules: {
         account: [
@@ -393,9 +475,18 @@ export default {
       }).finally(()=>{
       });
     },
-
-    getUserById() {
-      alert("查询");
+    setUser(){
+      setUser(this.temporary).then((res)=>{
+      ////res.data = Result (success,msg,data)
+        if(res.data.success){
+          this.$router.go(0);
+        }else{
+            this.$message.error(res.data.msg);
+        }
+      }).catch((err)=>{
+          this.$message.error("系统错误");
+      }).finally(()=>{
+      })
     },
 
     // 分页
@@ -422,22 +513,29 @@ export default {
       this.userMassageVisible = true;
     },
 
-    // 禁用确认框
-    open(user) {
-        this.$confirm('是否禁用该用户？', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'info'
-        }).then(() => {
-
-          this.disableUser(user);
-          
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消禁用'
-          });          
-        });
+    // 修改
+    openAmend(user) {
+      this.temporary = user;
+      this.userAmendVisible = true;
+    },
+    notarizeAmend(){
+      this.userAmendVisible = false;
+      this.setUser();
+    },
+    shutAmend(){
+      this.userAmendVisible = false;
+      this.temporary = {
+          id:1,
+          account: "",
+          avatar: "/static/user/dog.jpg",
+          admin: "0",
+          nickname: "",
+          email: "",
+          phone: "",
+          sex: "男",
+          brief: "",
+          state: "", 
+      };
     },
     //删除确认
     openDelete(user){

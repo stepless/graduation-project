@@ -30,6 +30,13 @@ export function viewArticle(id) {
     })
 }
 
+export function deleteArticle(article){
+    return request({
+        url: '/articles/delete',
+        method: 'post',
+        data: article
+    })
+}
 
 export function getArticlesByTag(id) {
     return request({

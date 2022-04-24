@@ -15,6 +15,11 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('../views/front-law.vue')
     },
     {
+        path: '/fish',
+        name: 'FrontFish',
+        component: () => import('../views/front-fish.vue')
+    },
+    {
         path: '/about',
         name: 'FrontAbout',
         component: () => import('../views/front-about.vue')
@@ -67,12 +72,12 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: '',
                 name: 'after',
-                component: () => import('../views/after/afterHome.vue')
+                component: () => import('../views/after/userList.vue')
             },
             {
-                path: '/afterHome',
-                name: 'afterHome',
-                component: () => import('../views/after/afterHome.vue')
+                path: '/afterFish',
+                name: 'afterFish',
+                component: () => import('../views/after/afterFish.vue')
             },
             {
                 path: '/user',

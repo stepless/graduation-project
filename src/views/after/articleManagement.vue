@@ -79,7 +79,7 @@
               </td>
               <td class="tableColumn8">
                 <div class="cell">
-                  <button>
+                  <button @click="openDelete(article)">
                     <el-tooltip class="item" effect="dark" content="删除" placement="top-end">
                         <i class="iconfont icon-shanchu"></i>
                     </el-tooltip>
@@ -169,7 +169,7 @@
 
 <script>
 import CommentItem from '@/components/article/commentItem'
-import {getArticles,viewArticle} from '@/api/article'
+import {getArticles,viewArticle,deleteArticle} from '@/api/article'
 import {getCommentsByArticle} from '@/api/comment'
 import "@/assets/css/userList.css";
 
@@ -261,9 +261,6 @@ export default {
       }).finally(()=>{
       });
     },
-    disableUser(user){
-      
-    },
     getCommentsByArticle(articleId) {
       let that = this
       getCommentsByArticle(articleId).then((res) => {
@@ -278,11 +275,19 @@ export default {
         }
       })
     },
-
-    getUserById() {
-      alert("查询");
+    deleteArticle(article){
+      deleteArticle(article).then((res)=>{
+        if(res.data.success){
+            this.$message.success("操作成功");
+              this.$router.go(0);
+          }else{
+              this.$message.error(res.data.msg);
+          }
+      }).catch((err)=>{
+          this.$message.error("系统错误");
+      }).finally(()=>{
+      });
     },
-
     // 分页
     limitPage(n){
       this.showArticle = [];
@@ -305,6 +310,22 @@ export default {
     },
 
     // 确认框
+    openDelete(article){
+      this.$confirm('是否删除该文章？', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'info'
+        }).then(() => {
+
+          this.deleteUser(user);
+          
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });          
+        });
+    },
   }
 };
 </script>

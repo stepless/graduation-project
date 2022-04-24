@@ -272,6 +272,7 @@
 .plastic-data .data-icon {
     width: 450px;
     margin-left: 30px;
+    margin-top:60px;
     position: relative;
     -webkit-animation: 1s linear 1 forwards showDown;
     animation: 1s linear 1 forwards showDown;

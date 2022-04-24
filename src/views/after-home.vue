@@ -30,21 +30,14 @@
                     @open="handleOpen"
                     @close="handleClose"
                 >
-                    <router-link to="/afterHome">
-                      <el-menu-item index="1">
-                          <el-icon><icon-menu /></el-icon>
-                          <span>后台管理</span>
-                      </el-menu-item>
-                    </router-link>
-
                     <router-link to="/user">
-                      <el-menu-item index="2">
+                      <el-menu-item index="1">
                         <el-icon><icon-menu /></el-icon>
                         <span>用户管理</span>
                       </el-menu-item>
                     </router-link>
                     
-                    <el-sub-menu index="3">
+                    <el-sub-menu index="2">
                       <template #title>
                           <el-icon><document /></el-icon>
                           <span>文章管理</span>
@@ -61,8 +54,8 @@
                       </el-menu-item-group>
                     </el-sub-menu>
 
-                    <router-link to="/articleManage">
-                      <el-menu-item index="4">
+                    <router-link to="/afterFish">
+                      <el-menu-item index="3">
                         <el-icon><icon-menu /></el-icon>
                         <span>濒危鱼类管理</span>
                       </el-menu-item>
@@ -80,6 +73,7 @@
 
 <script>
 import '@/assets/css/after-home.css'
+import '@/assets/css/userList.css'
 import default_avatar from '@/assets/img/dog.jpg';
 export default{
   data(){

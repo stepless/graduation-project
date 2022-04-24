@@ -13,7 +13,7 @@ export default {
 .footer{
     width:100%;
     position:absolute;
-    bottom:10px;
+    bottom:30px;
     left:0;
     right:0;
     text-align: center;

@@ -15,4 +15,7 @@ export default {
 </script>
 
 <style scoped>
+header.nav >>> nav.item2 ul li:nth-of-type(2) a{
+  color:#d15431;
+}
 </style>

@@ -1,48 +1,28 @@
 <template>
   <div id="write">
     <div class="contains">
-        <el-col :span="4" :offset="2">
-          <div class="me-write-info">写文章</div>
-        </el-col>
-        <el-col :span="4" :offset="6">
-          <div class="me-write-btn">
-            <el-button round @click="publishShow">发布</el-button>
-            <el-button round @click="cancel">取消</el-button>
-          </div>
-        </el-col>
+      <h1 class="title">添加文章</h1>
 
-      <el-container class="me-area me-write-box">
-        <el-main class="me-write-main">
-          <div class="me-write-title">
-            <el-input resize="none"
-                      type="textarea"
-                      autosize
-                      v-model="articleForm.title"
-                      placeholder="请输入标题"
-                      class="me-write-input">
-            </el-input>
-
-          </div>
-          <div id="placeholder" style="visibility: hidden;height: 89px;display: none;"></div>
-        </el-main>
-      </el-container>
-
-      <el-dialog title="摘要 分类 标签"
-                 :close-on-click-modal=false
-                 custom-class="me-dialog">
+      <div>
 
         <el-form :model="articleForm" ref="articleForm" :rules="rules">
+          <el-form-item prop="title">
+            <el-input resize="none"
+                      type="textarea"
+                      v-model="articleForm.title"
+                      placeholder="请输入标题"
+                      class="write-input">
+            </el-input>
+          </el-form-item>
+          <div class="write-content">
+            
+          </div>
           <el-form-item prop="summary">
             <el-input type="textarea"
                       v-model="articleForm.summary"
                       :rows="6"
                       placeholder="请输入摘要">
             </el-input>
-          </el-form-item>
-          <el-form-item label="文章分类" prop="category">
-            <el-select v-model="articleForm.category" value-key="id" placeholder="请选择文章分类">
-              <el-option v-for="c in categorys" :key="c.id" :label="c.categoryName" :value="c"></el-option>
-            </el-select>
           </el-form-item>
 
           <el-form-item label="文章标签" prop="tags">
@@ -55,7 +35,7 @@
           <el-button @click="publishVisible = false">取 消</el-button>
           <el-button type="primary" @click="publish('articleForm')">发布</el-button>
         </div>
-      </el-dialog>
+      </div>
     </div>
   </div>
 </template>
@@ -72,11 +52,6 @@
         this.getArticleById(this.$route.params.id)
       }
       this.getTags()
-
-      window.addEventListener('scroll', this.editorToolBarToFixedWrapper, false);
-    },
-    beforeDestroy() {
-      window.removeEventListener('scroll', this.editorToolBarToFixedWrapper, false)
     },
     data() {
       return {
@@ -86,16 +61,12 @@
           id: '',
           title: '',
           summary: '',
-          category: '',
           tags: [],
         },
         rules: {
           summary: [
             {required: true, message: '请输入摘要', trigger: 'blur'},
             {max: 80, message: '不能大于80个字符', trigger: 'blur'}
-          ],
-          category: [
-            {required: true, message: '请选择文章分类', trigger: 'change'}
           ],
           tags: [
             {type: 'array', required: true, message: '请选择标签', trigger: 'change'}
@@ -218,32 +189,21 @@
         })
 
       },
-      editorToolBarToFixed() {
-
-        let toolbar = document.querySelector('.v-note-op');
-        let curHeight = document.documentElement.scrollTop || document.body.scrollTop;
-        if (curHeight >= 160) {
-          document.getElementById("placeholder").style.display = "block"; //bad  用计算属性较好
-          toolbar.classList.add("me-write-toolbar-fixed");
-        } else {
-          document.getElementById("placeholder").style.display = "none";
-          toolbar.classList.remove("me-write-toolbar-fixed");
-        }
-      }
     },
-    // //组件内的守卫 调整body的背景色
-    // beforeRouteEnter(to, from, next) {
-    //   window.document.body.style.backgroundColor = '#fff';
-    //   next();
-    // },
-    // beforeRouteLeave(to, from, next) {
-    //   window.document.body.style.backgroundColor = '#f5f5f5';
-    //   next();
-    // }
   }
 </script>
 
 <style>
+  #write .contains{
+    padding: 40px 30px;
+    box-shadow:0px 0px 2px rgb(157, 157, 157);
+    border-radius: 6px;
+    min-width: 1048px;
+    height: 618px;
+  }
+  #write .contains h1.title{
+    font-size: 24px;
+  }
   .el-header {
     position: fixed;
     z-index: 1024;
@@ -251,46 +211,42 @@
     box-shadow: 0 2px 3px hsla(0, 0%, 7%, .1), 0 0 0 1px hsla(0, 0%, 7%, .1);
   }
 
-  .me-write-info {
+  .write-info {
     line-height: 60px;
     font-size: 18px;
     font-weight: 600;
   }
 
-  .me-write-btn {
+  .write-btn {
     margin-top: 10px;
   }
 
-  .me-write-box {
-    max-width: 700px;
-    margin: 80px auto 0;
-  }
+  
 
-  .me-write-main {
+  .write-main {
     padding: 0;
   }
 
-  .me-write-input textarea {
+  .write-input textarea {
     font-size: 32px;
     font-weight: 600;
     height: 20px;
-    border: none;
   }
 
-  .me-write-editor {
+  .write-editor {
     min-height: 650px !important;
   }
 
-  .me-header-left {
+  .header-left {
     margin-top: 10px;
   }
 
-  .me-title img {
+  .title img {
     max-height: 2.4rem;
     max-width: 100%;
   }
 
-  .me-write-toolbar-fixed {
+  .write-toolbar-fixed {
     position: fixed;
     width: 700px !important;
     top: 60px;

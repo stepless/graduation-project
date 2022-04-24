@@ -8,6 +8,9 @@
                 <img class="ya1 ya" src="../assets/img/小黄鸭1.png">
                 <img class="ya2 ya" src="../assets/img/小黄鸭2.png">
             </div>
+            <div class="topText">
+                <img src="@/assets/img/txt.png">
+            </div>
         </div>
         <Shallow />
         <Rubbish />
@@ -61,9 +64,26 @@ header.nav{
 header.nav >>> .item2 ul li a{
   color:white;
 }
+header.nav >>> nav.item2 ul li:nth-of-type(1) a{
+  color:#d15431;
+}
 .topImg{
     background: linear-gradient(0deg, rgba(133,221,201,1) 55%, rgba(57,133,206,1) 100%);
     position: relative;
+}
+.topImg .topText{
+    position: absolute;
+    width:100%;
+    z-index: 9;
+    top:0px;
+    left:0px;
+}
+.topImg .topText img{
+    display: block;
+    width:1300px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:130px;
 }
 .topImg .ripple-ya{
     position: relative;
