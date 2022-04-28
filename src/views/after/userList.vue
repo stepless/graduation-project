@@ -322,7 +322,7 @@
         <div class="buttonGroup">
           <button @click="notarizeAmend" type="button" class="sava">确认</button>
           <button @click="shutAmend" type="button" class="cancel">取消</button>
-      </div>
+        </div>
       </div>
     </div>
   </div>

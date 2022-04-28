@@ -60,6 +60,18 @@
                         <span>濒危鱼类管理</span>
                       </el-menu-item>
                     </router-link>
+                    <router-link to="/afterFish">
+                      <el-menu-item index="4">
+                        <el-icon><icon-menu /></el-icon>
+                        <span>标签管理</span>
+                      </el-menu-item>
+                    </router-link>
+                    <router-link to="/afterFish">
+                      <el-menu-item index="5">
+                        <el-icon><icon-menu /></el-icon>
+                        <span>用户评论管理</span>
+                      </el-menu-item>
+                    </router-link>
                 </el-menu>
                 </el-col>
             </el-row>

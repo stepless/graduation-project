@@ -116,34 +116,126 @@
           ref="temporary"
           label-width="70px"
         >
-          <el-form-item label="图像" prop="sex"> 
-              <input type="text"  v-model="temporary.avatar"/>
-              <input type="file" @change="upload" />
+          <el-form-item label="图像" prop="sex">
+              <input id="imgFile1" @change="upload1" type="file" />
+          </el-form-item>
+          <el-form-item label="剪影图" prop="sex">
+              <input id="imgFile2" @change="upload2" type="file" />
           </el-form-item>
           <el-form-item label="名称" prop="fishName">
             <el-input v-model="temporary.fishName"></el-input>
           </el-form-item>
           <el-form-item label="介绍" prop="introduce">
-            <el-input v-model="temporary.introduce"></el-input>
+            <el-input type="textarea" :rows="2" v-model="temporary.introduce"></el-input>
           </el-form-item>
-          <el-form-item label="分布地区" prop="region">
+          <el-form-item label="地区" prop="region">
             <el-input v-model="temporary.region"></el-input>
           </el-form-item>
-          <el-form-item label="生物学分类" prop="classification">
+          <el-form-item label="分类" prop="classification">
             <el-input v-model="temporary.classification" width="90%"></el-input>
           </el-form-item>
 
           <el-form-item>
-            <el-button @click="addDialogVisible = false">取 消</el-button>
+            <el-button @click="shit">取 消</el-button>
             <el-button type="primary" @click="submitForm('temporary')">确 定</el-button>
           </el-form-item>
         </el-form>
       </div>
     </div>
+
+    <!-- 详细信息 -->
+    <div v-if="fishMassageVisible" class="back userMessage">
+      <div class="details">
+        <div class="headImg headI">
+          <img :src="this.showFish[this.selectI].avatar" />
+        </div>
+        <div class="detailsText">
+          <ul>
+            <li>
+              <h3 class="field-label">名称:</h3>
+              <div class="field-content">
+                {{ this.showFish[this.selectI].fishName }}
+              </div>
+            </li>
+            <li>
+              <h3 class="field-label">地区:</h3>
+              <div class="field-content">
+                {{ this.showFish[this.selectI].region === ''? '空' :this.showFish[this.selectI].region }}
+              </div>
+            </li>
+            <li>
+              <h3 class="field-label">生物学分类:</h3>
+              <div class="field-content">
+                {{ this.showFish[this.selectI].classification === ''? '空' :this.showFish[this.selectI].classification }}
+              </div>
+            </li>
+            
+            <li>
+              <h3 class="field-label">介绍:</h3>
+              <div class="field-content">
+                {{ this.showFish[this.selectI].introduce === ''? '空' :this.showFish[this.selectI].introduce }}
+              </div>
+            </li>
+          </ul>
+        </div>
+        <button @click="this.fishMassageVisible = false" class="shut" type="button">
+          关闭
+        </button>
+      </div>
+    </div>
+
+    <!-- 修改 -->
+    <div v-if="fishAmendVisible" class="back userMessage">
+      <div class="details">
+        <div class="headImg headI">
+          <img :src="temporary.avatar" />
+          <input id="imgFile1" @change="upload" type="file" />
+        </div>
+        <div class="headImg headImg1 headI">
+          <img :src="temporary.sketch" />
+          <input id="imgFile1" @change="upload2" type="file" />
+        </div>
+        
+        <div class="detailsText">
+          <ul>
+            <li>
+              <h3 class="field-label">名称:</h3>
+              <div class="field-content">
+                <input type="text" v-model="temporary.fishName" placeholder="名称" />
+              </div>
+            </li>
+            <li>
+              <h3 class="field-label">地区:</h3>
+              <div class="field-content">
+                  <input type="text" v-model="temporary.region" placeholder="分布地区" />
+              </div>
+            </li>
+            <li>
+              <h3 class="field-label">生物学分类:</h3>
+              <div class="field-content">
+                  <input type="text" v-model="temporary.classification" placeholder="生物学分类" />
+              </div>
+            </li>
+            
+            <li>
+              <h3 class="field-label">介绍:</h3>
+              <div class="field-content">
+                <textarea rows="2" class="textarea" v-model="temporary.introduce" placeholder="介绍" />
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="buttonGroup">
+          <button @click="notarizeAmend" type="button" class="sava">确认</button>
+          <button @click="shutAmend" type="button" class="cancel">取消</button>
+        </div>
+      </div>
+    </div>
+
 </template>
 
 <script>
-import { findAllFish,addFish,deleteFish } from '@/api/fish.js'
+import { findAllFish,addFish,deleteFish,setFishById } from '@/api/fish.js'
 import {upload} from '@/api/upload'
 export default {
     data(){
@@ -155,8 +247,20 @@ export default {
             },
             pageN:0,
             addDialogVisible:false,
+            fishMassageVisible:false,
+            fishAmendVisible: false,
 
-            fishs: [],
+            fishs: [
+              {
+                id:1,
+                fishName: "",
+                avatar: "",
+                introduce: "",
+                region: "",
+                classification: "",
+                sketch: "",
+              },
+            ],
             showFish:[],
             temporary: {
                 id:1,
@@ -175,9 +279,11 @@ export default {
                     {required: true, message: '请输入分布地区', trigger: 'blur'},
                 ],
                 classification: [
-                    {required: true, message: '请输入介绍', trigger: 'blur'},
+                    {required: true, message: '请输入生物学分类', trigger: 'blur'},
+                ],
+                introduce: [
+                    { required: true, message: '请填写介绍', trigger: 'blur' }
                 ]
-                
             },
         }
         
@@ -191,16 +297,104 @@ export default {
         this.findAllFish();
     },
     methods: {
-        upload(el){
+        upload1(el){
           let file = el.target.files[0];
           let form = new FormData();
           form.append('image',file);
           upload(form).then((res)=>{
             if(res.data.success){
-              console.log(res.data);
-              this.temporary.avatar = '/image/' + file.name;
+              this.temporary.avatar = res.data.data.url;
             }else{
                this.$message.error(res.data.msg);
+            }
+          }).catch((err)=>{
+              this.$message.error("图片加载失败");
+          }).finally(()=>{
+          })
+        },
+        upload2(el){
+          let file = el.target.files[0];
+          let form = new FormData();
+          form.append('image',file);
+          upload(form).then((res)=>{
+            if(res.data.success){
+              this.temporary.sketch = res.data.data.url;
+            }else{
+               this.$message.error(res.data.msg);
+            }
+          }).catch((err)=>{
+              this.$message.error("图片加载失败");
+          }).finally(()=>{
+          })
+        },
+        limitPage(n){
+          this.showFish = [];
+          let size = n+8;
+          if(this.fishs.length < size){
+            for(let i = n; i < this.fishs.length; i++){
+              this.showFish.push(this.fishs[i]);
+            }
+          }else{
+            for(let i = n; i < size; i++){
+              this.showFish.push(this.fishs[i]);
+            }
+          }
+        },
+
+    // 发起请求
+        findAllFish(){
+          findAllFish().then((res)=>{
+            if(res.data.success){
+                this.fishs = res.data.data;
+                this.limitPage(this.pageN);
+            }else{
+                this.$message.error(res.data.msg);
+            }
+          }).catch((err)=>{
+              this.$message.error("濒危鱼类信息加载失败");
+          }).finally(()=>{
+          })
+        },
+
+        addFish(){
+            let that = this; 
+            setTimeout(()=>{
+              addFish(that.temporary).then((res)=>{
+                if(res.data.success){
+                  console.log(this.temporary.avatar);
+                  this.$message.success('保存成功');
+                  this.$router.go(0);
+                }else{
+                    this.$message.error(res.data.msg);
+                }
+              }).catch((err)=>{
+                  this.$message.error("添加失败");
+              }).finally(()=>{
+              })
+            },0)
+            
+        },
+
+        deleteFish(fish){
+          deleteFish(fish).then((res)=>{
+            if(res.data.success){
+                this.$message.success("操作成功");
+                  this.$router.go(0);
+              }else{
+                  this.$message.error(res.data.msg);
+              }
+          }).catch((err)=>{
+              this.$message.error("系统错误");
+          }).finally(()=>{
+          });
+        },
+        setFishById(){
+          setFishById(this.temporary).then((res)=>{
+          ////res.data = Result (success,msg,data)
+            if(res.data.success){
+              this.$router.go(0);
+            }else{
+                this.$message.error(res.data.msg);
             }
           }).catch((err)=>{
               this.$message.error("系统错误");
@@ -208,60 +402,78 @@ export default {
           })
         },
 
-    // 发起请求
-        findAllFish(){
-            findAllFish().then((res)=>{
-                if(res.data.success){
-                    this.fishs = res.data.data;
-                    this.limitPage(this.pageN);
-                }else{
-                    this.$message.error(res.data.msg);
-                }
-            }).catch((err)=>{
-                this.$message.error("系统错误");
-            }).finally(()=>{
-            })
+
+        // 修改
+        openAmend(fish) {
+          this.temporary = fish;
+          this.fishAmendVisible = true;
         },
-        addFish(){
-            let that = this;
-            addFish(that.temporary).then((res)=>{
-                if(res.data.success){
-                    this.$message.success('保存成功');
-                    this.$router.go(0);
-                }else{
-                    this.$message.error(res.data.msg);
-                }
-            }).catch((err)=>{
-                this.$message.error("系统错误");
-            }).finally(()=>{
-            })
+        notarizeAmend(){
+          this.fishAmendVisible = false;
+          this.setFishById();
+        },
+        shutAmend(){
+          this.fishAmendVisible = false;
+          this.temporary = {
+                id:1,
+                fishName: "",
+                avatar: "",
+                introduce: "",
+                region: "",
+                classification: "",
+                sketch: "",
+          };
+        },
+
+        openDetail(i){
+          this.selectI = i;
+          this.fishMassageVisible = true;
+        },
+
+        openDelete(fish){
+          this.$confirm('是否删除该濒危鱼类信息？', '提示', {
+              confirmButtonText: '确定',
+              cancelButtonText: '取消',
+              type: 'info'
+            }).then(() => {
+
+              this.deleteFish(fish);
+              
+            }).catch(() => {
+              this.$message({
+                type: 'info',
+                message: '已取消删除'
+            });          
+            });
+        },
+
+        shit(){
+          this.addDialogVisible = false;
+          this.temporary = {
+                id:1,
+                fishName: "",
+                avatar: "",
+                introduce: "",
+                region: "",
+                classification: "",
+                sketch: "",
+          };
+        },
+
+        submitForm(formName) {
+          let that = this;
+          this.$refs[formName].validate((valid) => {
+            if (valid) {
+              that.addFish();
+            } else {
+              return false;
+            }
+          });
         },
     },
 
 
-    limitPage(n){
-      this.showFish = [];
-      let size = n+8;
-      if(this.fishs.length < size){
-        for(let i = n; i < this.fishs.length; i++){
-          this.showFish.push(this.fishs[i]);
-        }
-      }else{
-        for(let i = n; i < size; i++){
-          this.showFish.push(this.fishs[i]);
-        }
-      }
-    },
-
-    submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            this.addFish();
-          } else {
-            return false;
-          }
-        });
-    },
+    
 }
 </script>
 
@@ -278,5 +490,18 @@ export default {
 }
 .el-form >>> .el-form-item textarea{
   resize: none;
+}
+.userMessage .details .headI{
+  display: flex;
+  align-items: center;
+}
+.userMessage .details .headImg input{
+  position:absolute;
+  left:0px;
+  top:180px;
+}
+.userMessage .details .headImg1{
+  top:260px;
+  left: 30px;
 }
 </style>

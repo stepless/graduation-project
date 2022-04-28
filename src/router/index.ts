@@ -17,7 +17,18 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/fish',
         name: 'FrontFish',
-        component: () => import('../views/front-fish.vue')
+        component: () => import('../views/front-fish.vue'),
+        children: [
+            {
+                path: '',
+                name: 'fishHome',
+                component: () => import('../views/fish/fishHome.vue')
+            },
+            {
+                path: '/show/:id',
+                component: () => import('../views/fish/fishShow.vue')
+            },
+        ]
     },
     {
         path: '/about',
