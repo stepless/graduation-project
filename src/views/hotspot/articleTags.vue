@@ -2,7 +2,10 @@
 	<div class="body" >
         <main class="container">
             <!-- <tab-pane label="标签" name="tag"> -->
-            标签
+            <div class="tagTitle">
+              <h2>标签</h2>
+            </div>
+            
             <ul class="items">
                 <li v-for="t in tags" @click="view(t.id)" :key="t.id" class="item">
                     <div class="content">
@@ -65,7 +68,16 @@
     margin-left: auto;
     margin-right: auto;
   }
-
+  .tagTitle{
+    padding:30px 0;
+    border-bottom:1px solid #aaa;
+    margin-left: 0.7em;
+    margin-bottom: 30px;
+  }
+  .tagTitle h2{
+    font-size: 24px;
+    color: #666;
+  }
   .container {
     width: 1000px;
   }
@@ -122,5 +134,10 @@
   .meta {
     font-size: 12px;
     color: #969696;
+  }
+  .content .info .img{
+    padding:4px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, .3);
+    border-radius: 4px;
   }
 </style>

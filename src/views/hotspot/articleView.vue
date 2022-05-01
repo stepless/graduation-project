@@ -215,7 +215,9 @@ export default {
     width: 730px;
     overflow: hidden;
   }
-
+  .view-card{
+    padding-bottom:60px;
+  }
   .view-title {
     font-size: 26px;
     font-weight: 800;

@@ -34,3 +34,18 @@ export function getTagDetail(id) {
         method: 'get',
     })
 }
+
+export function deleteTag(tag){
+    return request({
+        url:'tags/delete',
+        method:'post',
+        data:tag
+    })
+}
+export function addTag(tag){
+    return request({
+        url:'tags/add',
+        method:'post',
+        data:tag
+    })
+}

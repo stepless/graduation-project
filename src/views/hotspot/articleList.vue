@@ -100,6 +100,6 @@ export default {
 .rightSide{
     width:254px;
     margin-left: 20px;
-    padding-top:56px;
+    /* padding-top:56px; */
 }
 </style>

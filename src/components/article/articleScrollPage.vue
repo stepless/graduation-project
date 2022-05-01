@@ -57,7 +57,7 @@ export default {
                     this.$message.error(res.data.msg);
                 }
             }).catch((err)=>{
-                //this.$message.error("系统错误");
+                this.$message.error("文章数据获取失败");
             }).finally(()=>{
                 this.loading = false;
             })

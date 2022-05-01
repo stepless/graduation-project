@@ -159,7 +159,7 @@ header.nav >>> .item2 ul li a{
 .goRegister{
   position:absolute;
   right:0px;
-  bottom:-30px;
+  top:37px;
   color:rgb(194, 194, 194);
 }
 .goRegister a:hover{

@@ -317,7 +317,7 @@ export default {
           type: 'info'
         }).then(() => {
 
-          this.deleteUser(user);
+          this.deleteArticle(article);
           
         }).catch(() => {
           this.$message({

@@ -15,3 +15,18 @@ export function publishComment(comment) {
         data: comment
     })
 }
+
+export function findAllComment() {
+    return request({
+        url: '/comments',
+        method: 'get',
+    })
+}
+
+export function deleteComment(comment) {
+    return request({
+        url: '/comments/delete',
+        method: 'post',
+        data:comment
+    })
+}

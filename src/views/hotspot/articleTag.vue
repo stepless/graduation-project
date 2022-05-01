@@ -64,6 +64,10 @@
 </script>
 
 <style>
+img.ct-picture{
+	padding:4px;
+	box-shadow:0px 0px 2px rgba(0, 0, 0, .3)
+}
   .ct-body {
     padding-top:120px;
     min-width: 100%;
@@ -77,7 +81,6 @@
     text-align: center;
     height: 180px;
     padding: 20px;
-	border:1px solid red;
   }
 
   .ct-picture {

@@ -101,6 +101,21 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import('../views/after/articleManagement.vue')
             },
             {
+                path: '/afterTag',
+                name: 'afterTag',
+                component: () => import('../views/after/afterTag.vue')
+            },
+            {
+                path: '/afterComment',
+                name: 'afterComment',
+                component: () => import('../views/after/afterComment.vue')
+            },
+            {
+                path: '/articleManage',
+                name: 'articleManage',
+                component: () => import('../views/after/articleManagement.vue')
+            },
+            {
                 path: '/write',
                 name: 'write',
                 component: () => import('../views/after/write.vue')

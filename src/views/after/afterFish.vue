@@ -117,10 +117,16 @@
           label-width="70px"
         >
           <el-form-item label="图像" prop="sex">
-              <input id="imgFile1" @change="upload1" type="file" />
+              <a href="javascript:;" class="file">
+              <input id="imgFile1" @change="upload1" type="file" />上传图像
+              </a>
+              {{temporary.avatar}}
           </el-form-item>
           <el-form-item label="剪影图" prop="sex">
-              <input id="imgFile2" @change="upload2" type="file" />
+            <a href="javascript:;" class="file">
+              <input id="imgFile2" @change="upload2" type="file" />上传剪影图
+            </a>
+            {{temporary.sketch}}
           </el-form-item>
           <el-form-item label="名称" prop="fishName">
             <el-input v-model="temporary.fishName"></el-input>
@@ -503,5 +509,33 @@ export default {
 .userMessage .details .headImg1{
   top:260px;
   left: 30px;
+}
+.file {
+    position: relative;
+    display: inline-block;
+    background: #D0EEFF;
+    border: 1px solid #99D3F5;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #1E88C7;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+    cursor: pointer;
+}
+.file input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+.file:hover {
+    background: #AADFFD;
+    border-color: #78C3F3;
+    color: #004974;
+    text-decoration: none;
 }
 </style>

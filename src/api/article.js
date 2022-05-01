@@ -46,9 +46,8 @@ export function getArticlesByTag(id) {
 }
 
 
-export function publishArticle(article, token) {
+export function publishArticle(article) {
     return request({
-        headers: {'Authorization': token},
         url: '/articles/publish',
         method: 'post',
         data: article
