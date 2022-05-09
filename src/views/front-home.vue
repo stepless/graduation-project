@@ -17,6 +17,7 @@
         <Whale />
         <Seabed />
         <Below />
+        <Data/>
     </div>
 </template>
 
@@ -27,13 +28,14 @@ import Rubbish from "../components/sea/rubbish.vue";
 import Whale from "../components/sea/whale.vue";
 import Seabed from "../components/sea/seabed.vue";
 import Below from "../components/sea/below.vue";
+import Data from "./front-data.vue";
 export default {
     data(){
         return {
             documentWidth : document.body.clientWidth
         }
     },
-    components:{Header,Shallow,Rubbish,Whale,Seabed,Below,},
+    components:{Header,Shallow,Rubbish,Whale,Seabed,Below,Data},
     computed:{
         left(){
             return this.documentWidth/2;
