@@ -109,6 +109,7 @@ header.nav >>> nav.item2 ul li:nth-of-type(3) a{
     position: relative;
     padding:4px;
     overflow: hidden;
+    cursor: pointer;
 }
 .fish ul.fishList .item a{
     display: block;

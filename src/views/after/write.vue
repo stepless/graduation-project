@@ -86,7 +86,6 @@
     },
     methods: {
       publish(temporary) {
-        alert('123');
         let that = this
 
         this.$refs[temporary].validate((valid) => {

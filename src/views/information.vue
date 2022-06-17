@@ -54,7 +54,8 @@
                                 <span class="field-text" v-html="brief"></span>
                                 <button @click="this.setIsShow(1)" type="button" class="field-modify">
                                     <i class="iconfont icon-bianji"></i>
-                                    修改
+                                    <span v-if="user.brief.length > 0">修改</span>
+                                    <span v-if="user.brief.length <= 0">填写</span>
                                 </button>
                             </div>
                             <div v-if="!this.isShow[1]">
@@ -73,7 +74,8 @@
                                 <span class="field-text">{{ user.email }}</span>
                                 <button @click="this.setIsShow(2)" type="button" class="field-modify">
                                     <i class="iconfont icon-bianji"></i>
-                                    修改
+                                    <span v-if="user.email.length > 0">修改</span>
+                                    <span v-if="user.email.length <= 0">填写</span>
                                 </button>
                             </div>
                             <div v-if="!this.isShow[2]">
@@ -93,11 +95,12 @@
                                 <span class="field-text">{{ user.phone }}</span>
                                 <button @click="this.setIsShow(3)" type="button" class="field-modify">
                                     <i class="iconfont icon-bianji"></i>
-                                    修改
+                                    <span v-if="user.phone.length > 0">修改</span>
+                                    <span v-if="user.phone.length <= 0">填写</span>
                                 </button>
                             </div>
                             <div v-if="!this.isShow[3]">
-                                <input type="text" v-model="temporary.phone" placeholder="邮箱" />
+                                <input type="text" v-model="temporary.phone" placeholder="手机号" />
 
                                 <div class="buttonGroup">
                                     <button @click="this.temporaryUser(3,true)" type="button" class="sava">保存</button>

@@ -21,8 +21,8 @@
             </p>
           </div>
           
-          <ul class="tag-list">
-            <li class="tag-item" v-for="t in article.tags" :key="t.id">
+          <ul class="v-tag-list">
+            <li class="v-tag-item" v-for="t in article.tags" :key="t.id">
               <button @click="tag(t.id)" type="button">{{t.tagName}}</button>
             </li>
           </ul>
@@ -36,7 +36,7 @@
           <div class="view-comment">
             <div class="view-comment-write">
               <div class="headImg-write">
-                <div class="headImg">
+                <div class="headImg3">
                   <img class="view-picture" :src="commentAvatar" />
                 </div>
                 <div class="write">
@@ -265,7 +265,7 @@ export default {
     word-wrap: break-word;
     white-space: pre-wrap;
   }
-  .tag-list .tag-item{
+  .v-tag-list .v-tag-item{
       display: inline-block;
       white-space: nowrap;
       margin-right: 10px;
@@ -278,12 +278,12 @@ export default {
       vertical-align: top;
       margin-top:25px;
     }
-    .tag-item button{
+    .v-tag-item button{
         color: #37a;
         cursor: pointer;
     }
 
-    .tag-list .tag-item:hover {
+    .v-tag-list .v-tag-item:hover {
         background-color: #e8e8e8;
     }
     .view-container .main .viewComment {

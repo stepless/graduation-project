@@ -62,14 +62,12 @@ export default {
     return {
       tags: [
         {
-          id:1,
-          tagName: "塑料垃圾",
+          tagName: "",
           avatar: "", 
         },
 
       ],
       temporary: {
-          id:1,
           tagName: "",
           avatar: "", 
       },
